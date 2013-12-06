@@ -61,7 +61,12 @@ module Tmdb
     def fetch_response
       options = @params.merge(Api.config)
       response = Api.get(@resource, :query => options)
-      etag = response.headers['etag'].gsub /"/, ''
+
+      if response.headers['etag'].nil?
+        etag = nil
+      else
+        etag = response.headers['etag'].gsub /"/, ''
+      end
       Api.set_response({'code' => response.code, 'etag' => etag})
       response.to_hash
     end
