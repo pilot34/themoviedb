@@ -40,26 +40,30 @@ module Tmdb
     end
 
     #Get the list of upcoming movies. This list refreshes every day. The maximum number of items this list will include is 100.
-    def self.upcoming
+    def self.upcoming(conditions={})
       search = Tmdb::Search.new("/movie/upcoming")
+      search.filter(conditions)
       search.fetch
     end
 
     #Get the list of movies playing in theatres. This list refreshes every day. The maximum number of items this list will include is 100.
-    def self.now_playing
+    def self.now_playing(conditions={})
       search = Tmdb::Search.new("/movie/now_playing")
+      search.filter(conditions)
       search.fetch
     end
 
     #Get the list of popular movies on The Movie Database. This list refreshes every day.
-    def self.popular
+    def self.popular(conditions={})
       search = Tmdb::Search.new("/movie/popular")
+      search.filter(conditions)
       search.fetch
     end
 
     #Get the list of top rated movies. By default, this list will only include movies that have 10 or more votes. This list refreshes every day.
-    def self.top_rated
+    def self.top_rated(conditions={})
       search = Tmdb::Search.new("/movie/top_rated")
+      search.filter(conditions)
       search.fetch
     end
 
